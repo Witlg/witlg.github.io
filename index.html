@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио · мои работы</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="portfolio-card">
+        <div class="header">
+            <h1>✦ мои работы</h1>
+            <p>портфолио · разработка · дизайн</p>
+        </div>
+
+        <!-- сетка с изображениями -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- изображение 1 -->
+            <div class="image-wrapper" data-project="проект 1">
+                <div class="running-border-box">
+                    <span></span>
+                    <img src="images/work1.jpg" alt="Работа 1" class="gallery-image" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- изображение 2 -->
+            <div class="image-wrapper" data-project="проект 2">
+                <div class="running-border-box">
+                    <span></span>
+                    <img src="images/work2.jpg" alt="Работа 2" class="gallery-image" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- изображение 3 -->
+            <div class="image-wrapper" data-project="проект 3">
+                <div class="running-border-box">
+                    <span></span>
+                    <img src="images/work3.jpg" alt="Работа 3" class="gallery-image" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- изображение 4 -->
+            <div class="image-wrapper" data-project="проект 4">
+                <div class="running-border-box">
+                    <span></span>
+                    <img src="images/work4.jpg" alt="Работа 4" class="gallery-image" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- изображение 5 -->
+            <div class="image-wrapper" data-project="проект 5">
+                <div class="running-border-box">
+                    <span></span>
+                    <img src="images/work5.jpg" alt="Работа 5" class="gallery-image" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- изображение 6 -->
+            <div class="image-wrapper" data-project="проект 6">
+                <div class="running-border-box">
+                    <span></span>
+                    <img src="images/work6.jpg" alt="Работа 6" class="gallery-image" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <span class="badge"><i>✦</i> наведи на изображение — появится белая бегущая рамка</span>
+            <span style="color:#6d5b9e; font-size:0.9rem;">кликни — узнаешь подробности</span>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-box">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <div class="modal-title" id="modalTitle">Название проекта</div>
+            <div class="modal-desc" id="modalDesc">Описание проекта.</div>
+            <div class="modal-meta">
+                <span id="modalDate">2024</span>
+                <span id="modalTech">HTML · CSS · JS</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
