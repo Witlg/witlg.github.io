@@ -57,24 +57,29 @@ body {
     text-shadow: 0 0 12px rgba(100, 70, 255, 0.3);
 }
 
-/* сетка для изображений */
+/* сетка для изображений (2x2) */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin: 3rem 0 1.5rem;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* обёртка для изображения */
+/* обёртка для изображения - фиксированные размеры 960x1280 */
 .image-wrapper {
     position: relative;
     border-radius: 1.5rem;
     overflow: hidden;
     cursor: pointer;
-    aspect-ratio: 4 / 3;
+    width: 100%;
+    aspect-ratio: 960 / 1280; /* 3:4 пропорция */
     background: rgba(20, 12, 50, 0.4);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 960px;
 }
 
 /* КОНТЕЙНЕР С БЕГУЩЕЙ РАМКОЙ */
@@ -248,32 +253,38 @@ body {
     border-radius: 30px;
 }
 
-/* адаптив */
-@media (max-width: 640px) {
-    .portfolio-card {
-        padding: 2rem 1.25rem;
-        border-radius: 2rem;
-    }
-    .header h1 {
-        font-size: 2.5rem;
-    }
+/* адаптив для планшетов */
+@media (max-width: 768px) {
     .gallery-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
     }
     .image-wrapper {
-        aspect-ratio: 4 / 3;
-    }
-    .modal-box {
-        padding: 1.8rem 1.2rem;
+        aspect-ratio: 3 / 4;
     }
 }
 
-@media (max-width: 420px) {
+/* адаптив для телефонов */
+@media (max-width: 480px) {
+    .portfolio-card {
+        padding: 1.5rem 1rem;
+        border-radius: 1.5rem;
+    }
+    .header h1 {
+        font-size: 2rem;
+    }
     .gallery-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 480px;
     }
     .image-wrapper {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 4;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+    .modal-box {
+        padding: 1.5rem 1rem;
+        margin: 0 0.5rem;
     }
 }
