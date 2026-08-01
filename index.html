@@ -3,60 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио · мои работы</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Kitsune Estate — розово-фиолетовое агенство</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="portfolio-card">
-        <div class="header">
-            <h1>✦ мои работы</h1>
+
+<!-- ===== ФОН С РАЗМЫТИЕМ ===== -->
+<div class="bg-wrapper">
+    <div class="bg-blur"></div>
+</div>
+
+<!-- ===== 3D ТРЕУГОЛЬНИКИ ===== -->
+<div class="triangles-container" id="trianglesContainer"></div>
+
+<div class="container">
+
+    <!-- ===== ШАПКА ===== -->
+    <header class="header">
+        <div class="logo" onclick="showPage('home')">
+            <span class="logo-icon"><i class="fas fa-fox"></i></span>
+            Kitsune Estate
+        </div>
+        <div class="nav-links">
+            <a class="active" onclick="showPage('home')"><i class="fas fa-home"></i> Главная</a>
+            <a onclick="showPage('catalog')"><i class="fas fa-building"></i> Дома</a>
+            <a onclick="showPage('garages')"><i class="fas fa-warehouse"></i> Гаражи</a>
+            <a onclick="showPage('transport')"><i class="fas fa-car"></i> Транспорт</a>
+            <a onclick="showPage('contacts')"><i class="fas fa-phone"></i> Контакты</a>
+        </div>
+    </header>
+
+    <!-- ===== ГЛАВНАЯ ===== -->
+    <div class="page-section active" id="page-home">
+        <div class="hero">
+            <div class="hero-badge">
+                <i class="fas fa-star" style="margin-right: 6px;"></i> Добро пожаловать в Kitsune Estate
+            </div>
+            <h1>Ваш гид по недвижимости<br>и транспорту в Rodina RP</h1>
+            <p>
+                Мы — команда профессионалов, которая помогает найти идеальный дом, 
+                гараж или авто. С нами вы всегда будете в курсе самых выгодных предложений.
+            </p>
+            <button class="hero-btn" onclick="showPage('catalog')">
+                <i class="fas fa-search"></i> Смотреть каталог
+            </button>
         </div>
 
-        <!-- сетка с изображениями (4 карточки) -->
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- изображение 1 -->
-            <div class="image-wrapper" data-project="проект 1">
-                <div class="running-border-box">
-                    <span></span>
-                    <img src="images/work1.jpg" alt="Работа 1" class="gallery-image" onerror="this.style.display='none'">
+        <h2 class="section-title">Наши задачи</h2>
+        <p class="section-subtitle">То, ради чего мы создали это агентство</p>
+
+        <div class="tasks-grid">
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-folder-open"></i></div>
+                <h3>Централизованный каталог</h3>
+                <p>Создание единой онлайн-базы всех объектов недвижимости и транспорта, выставленных на продажу через агентство.</p>
+            </div>
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-sliders-h"></i></div>
+                <h3>Фильтрация и поиск</h3>
+                <p>Удобный инструмент для быстрого подбора объектов по типу, ценовому диапазону и другим параметрам.</p>
+            </div>
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-check-circle"></i></div>
+                <h3>Актуальность и прозрачность</h3>
+                <p>Отображение реального статуса каждого объекта с указанием контактных данных ответственного агента.</p>
+            </div>
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-users-cog"></i></div>
+                <h3>Единое рабочее пространство</h3>
+                <p>Ведение общей базы объектов для сотрудников, упрощение учёта и публикации новых предложений.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ДОМА ===== -->
+    <div class="page-section" id="page-catalog">
+        <h2 class="page-title">
+            <i class="fas fa-building" style="background: none; -webkit-text-fill-color: #d946ef;"></i> Дома
+        </h2>
+        <p class="page-subtitle">Только дома — выбирайте свой идеальный вариант</p>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label><i class="fas fa-sliders-h"></i> Статус:</label>
+                <button class="filter-btn active" data-status="all" data-target="houses">Все</button>
+                <button class="filter-btn" data-status="sale" data-target="houses"><i class="fas fa-check-circle" style="color:#10b981;"></i> В продаже</button>
+                <button class="filter-btn" data-status="sold" data-target="houses"><i class="fas fa-times-circle" style="color:#ef4444;"></i> Продано</button>
+            </div>
+        </div>
+
+        <div class="results-info">Показано <span id="houseCount">0</span> домов</div>
+        <div class="cards-grid" id="housesGrid"></div>
+    </div>
+
+    <!-- ===== ГАРАЖИ ===== -->
+    <div class="page-section" id="page-garages">
+        <h2 class="page-title">
+            <i class="fas fa-warehouse" style="background: none; -webkit-text-fill-color: #d946ef;"></i> Гаражи
+        </h2>
+        <p class="page-subtitle">Все гаражи в одном месте</p>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label><i class="fas fa-sliders-h"></i> Статус:</label>
+                <button class="filter-btn active" data-status="all" data-target="garages">Все</button>
+                <button class="filter-btn" data-status="sale" data-target="garages"><i class="fas fa-check-circle" style="color:#10b981;"></i> В продаже</button>
+                <button class="filter-btn" data-status="sold" data-target="garages"><i class="fas fa-times-circle" style="color:#ef4444;"></i> Продано</button>
+            </div>
+        </div>
+
+        <div class="results-info">Показано <span id="garageCount">0</span> гаражей</div>
+        <div class="cards-grid" id="garagesGrid"></div>
+    </div>
+
+    <!-- ===== ТРАНСПОРТ ===== -->
+    <div class="page-section" id="page-transport">
+        <h2 class="page-title">
+            <i class="fas fa-car" style="background: none; -webkit-text-fill-color: #d946ef;"></i> Транспорт
+        </h2>
+        <p class="page-subtitle">Выберите категорию транспорта</p>
+
+        <div class="transport-grid" id="transportCategories">
+            <div class="transport-card" onclick="showTransportCategory('cars')">
+                <div class="transport-icon"><i class="fas fa-car-side"></i></div>
+                <h3>Легковые авто</h3>
+                <p>Широкий выбор автомобилей для любых задач</p>
+            </div>
+            <div class="transport-card" onclick="showTransportCategory('trucks')">
+                <div class="transport-icon"><i class="fas fa-truck"></i></div>
+                <h3>Грузовой транспорт</h3>
+                <p>Грузовики, фургоны и спецтехника</p>
+            </div>
+            <div class="transport-card" onclick="showTransportCategory('motorcycles')">
+                <div class="transport-icon"><i class="fas fa-motorcycle"></i></div>
+                <h3>Мотоциклы</h3>
+                <p>Спортивные, круизеры и эндуро</p>
+            </div>
+            <div class="transport-card" onclick="showTransportCategory('water')">
+                <div class="transport-icon"><i class="fas fa-ship"></i></div>
+                <h3>Водный транспорт</h3>
+                <p>Катера, яхты и лодки</p>
+            </div>
+        </div>
+
+        <div class="sub-catalog" id="transportSubCatalog">
+            <button class="back-btn" onclick="hideTransportSubCatalog()"><i class="fas fa-arrow-left"></i> Назад к категориям</button>
+            <div class="cards-grid" id="transportCardsGrid"></div>
+        </div>
+    </div>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <div class="page-section" id="page-contacts">
+        <h2 class="page-title" style="text-align: center;">
+            <i class="fas fa-phone" style="background: none; -webkit-text-fill-color: #d946ef;"></i> Контакты
+        </h2>
+        <p class="page-subtitle" style="text-align: center;">Свяжитесь с нами любым удобным способом</p>
+
+        <div class="contacts-page">
+            <div class="contact-card">
+                <div class="icon"><i class="fab fa-discord"></i></div>
+                <div class="info">
+                    <h3>Discord</h3>
+                    <p>Присоединяйтесь к нашему серверу</p>
+                    <a href="#">@kitsune_estate</a>
                 </div>
             </div>
-
-            <!-- изображение 2 -->
-            <div class="image-wrapper" data-project="проект 2">
-                <div class="running-border-box">
-                    <span></span>
-                    <img src="images/work2.jpg" alt="Работа 2" class="gallery-image" onerror="this.style.display='none'">
+            <div class="contact-card">
+                <div class="icon"><i class="fas fa-envelope"></i></div>
+                <div class="info">
+                    <h3>Email</h3>
+                    <p>Для официальных запросов</p>
+                    <a href="mailto:kitsune.estate@example.com">kitsune.estate@example.com</a>
                 </div>
             </div>
-
-            <!-- изображение 3 -->
-            <div class="image-wrapper" data-project="проект 3">
-                <div class="running-border-box">
-                    <span></span>
-                    <img src="images/work3.jpg" alt="Работа 3" class="gallery-image" onerror="this.style.display='none'">
+            <div class="contact-card">
+                <div class="icon"><i class="fab fa-telegram"></i></div>
+                <div class="info">
+                    <h3>Telegram</h3>
+                    <p>Быстрые консультации</p>
+                    <a href="#">@kitsune_agency</a>
                 </div>
             </div>
-
-            <!-- изображение 4 -->
-            <div class="image-wrapper" data-project="проект 4">
-                <div class="running-border-box">
-                    <span></span>
-                    <img src="images/work4.jpg" alt="Работа 4" class="gallery-image" onerror="this.style.display='none'">
+            <div class="contact-card">
+                <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="info">
+                    <h3>Телефон</h3>
+                    <p>Горячая линия</p>
+                    <a href="tel:+79991234567">+7 (999) 123-45-67</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно -->
-    <div class="modal-overlay" id="productModal">
-        <div class="modal-box">
-            <button class="modal-close" id="modalCloseBtn">&times;</button>
-            <div class="modal-title" id="modalTitle">Название проекта</div>
-            <div class="modal-desc" id="modalDesc">Описание проекта.</div>
-        </div>
+    <!-- ===== ФУТЕР ===== -->
+    <div class="footer">
+        <i class="fas fa-fox"></i> Kitsune Estate — создано с любовью для Rodina RP
+        <br><span style="font-size: 12px; color: #4a3a5a;">© 2026 Все права защищены</span>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<!-- ===== Main JavaScript ===== -->
+<script src="js/main.js"></script>
 </body>
 </html>
