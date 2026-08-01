@@ -513,4 +513,148 @@ window.showPage = function(page) {
         const text = link.textContent.trim().toLowerCase();
         const map = {
             'home': 'главная',
-            'catalog
+            'catalog': 'дома',
+            'garages': 'гаражи',
+            'transport': 'транспорт',
+            'contacts': 'контакты'
+        };
+        if (text === page || (map[page] && text === map[page])) {
+            link.classList.add('active');
+        }
+    });
+
+    // Перерисовываем контент при необходимости
+    if (page === 'catalog') renderHouses();
+    if (page === 'garages') renderGarages();
+};
+
+// ========================================
+// FILTER SETUP
+// ========================================
+
+/**
+ * Настраивает фильтры для домов и гаражей
+ */
+function setupFilters() {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const target = this.dataset.target; // 'houses' или 'garages'
+            const status = this.dataset.status;
+
+            // Обновляем активный класс в группе
+            const parent = this.closest('.filter-group');
+            parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            // Обновляем состояние фильтра
+            filters[target] = status;
+
+            // Перерисовываем соответствующую сетку
+            if (target === 'houses') renderHouses();
+            if (target === 'garages') renderGarages();
+        });
+    });
+}
+
+// ========================================
+// 3D TRIANGLES
+// ========================================
+
+/**
+ * Создаёт 3D-треугольники на фоне
+ */
+function createTriangles() {
+    const container = document.getElementById('trianglesContainer');
+    const count = 25;
+
+    for (let i = 0; i < count; i++) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'triangle-3d';
+
+        const size = 40 + Math.random() * 50;
+        const xOffsets = Array.from({ length: 4 }, () => (Math.random() - 0.5) * 150);
+        const yOffsets = Array.from({ length: 4 }, () => (Math.random() - 0.5) * 150);
+
+        wrapper.style.width = size + 'px';
+        wrapper.style.height = (size * 0.86) + 'px';
+        wrapper.style.left = Math.random() * 100 + '%';
+        wrapper.style.top = Math.random() * 100 + '%';
+        
+        // CSS-переменные для анимации
+        xOffsets.forEach((x, idx) => wrapper.style.setProperty(`--x${idx + 1}`, x + 'px'));
+        yOffsets.forEach((y, idx) => wrapper.style.setProperty(`--y${idx + 1}`, y + 'px'));
+
+        // 3D грани
+        wrapper.innerHTML = `
+            <div class="face face-front"></div>
+            <div class="face face-back"></div>
+            <div class="face face-left"></div>
+            <div class="face face-right"></div>
+            <div class="vertex vertex-top"></div>
+            <div class="vertex vertex-bottom-left"></div>
+            <div class="vertex vertex-bottom-right"></div>
+            <div class="edge edge-top-left"></div>
+            <div class="edge edge-top-right"></div>
+            <div class="edge edge-bottom"></div>
+        `;
+
+        // Случайный начальный поворот
+        const rotX = (Math.random() - 0.5) * 30;
+        const rotY = (Math.random() - 0.5) * 30;
+        wrapper.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${Math.random() * 360}deg)`;
+        wrapper.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        // Обработка наведения мыши
+        wrapper.addEventListener('mouseenter', function(e) {
+            const rect = this.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 300) {
+                const angle = Math.atan2(dy, dx);
+                const force = Math.min(300 / (dist + 10), 4);
+                const moveX = -Math.cos(angle) * force * 120;
+                const moveY = -Math.sin(angle) * force * 120;
+
+                this.style.transition = 'transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s';
+                this.style.transform = `translate(${moveX}px, ${moveY}px) rotateX(${30 + Math.random() * 30}deg) rotateY(${40 + Math.random() * 40}deg) rotateZ(${Math.random() * 60 - 30}deg) scale(2)`;
+                this.style.opacity = '0.5';
+                this.style.zIndex = '10';
+            }
+        });
+
+        wrapper.addEventListener('mouseleave', function() {
+            this.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s';
+            this.style.transform = '';
+            this.style.opacity = '';
+            this.style.zIndex = '';
+        });
+
+        container.appendChild(wrapper);
+    }
+}
+
+// ========================================
+// INITIALIZATION
+// ========================================
+
+/**
+ * Главная функция инициализации
+ */
+function init() {
+    createTriangles();
+    setupFilters();
+    showPage('home');
+    renderHouses();
+    renderGarages();
+}
+
+// Запускаем после загрузки DOM
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
