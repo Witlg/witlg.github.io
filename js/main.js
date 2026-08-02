@@ -14,10 +14,10 @@ const housesData = [
         id: 1,
         image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop',
         price: '12 500 000',
-        location: 'Центральный парк, 5',
-        seller: 'Екатерина Волкова',
-        agent: '@kate_estate',
-        contacts: '+7 999 111-22-33, @kate_house',
+        location: 'г.Эдово',
+        seller: 'Продевец: Екатерина Волкова',
+        agent: 'Агент: @kate_estate',
+        contacts: 'Discodr: @kate_house',
         status: 'sale'
     },
     {
