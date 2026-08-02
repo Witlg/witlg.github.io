@@ -17,34 +17,34 @@ const housesData = [
         location: 'г.Эдово',
         seller: 'Продевец: Екатерина Волкова',
         agent: 'Агент: @kate_estate',
-        contacts: 'Discodr: @kate_house',
+        contacts: 'Discord: @kate_house',
         status: 'sale'
     },
     {
         id: 2,
         image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop',
         price: '9 200 000',
-        location: 'Зелёная аллея, 12',
-        seller: 'Дмитрий Петров',
-        agent: '@dima_pro',
-        contacts: '+7 999 222-33-44, @dima_realtor',
+        location: 'г.Эдово',
+        seller: 'Продевец: Дмитрий Петров',
+        agent: 'Агент: @dima_pro',
+        contacts: 'Discord: @dima_realtor',
         status: 'sale'
     },
     {
         id: 3,
         image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop',
         price: '18 700 000',
-        location: 'Набережная, 8',
+        location: 'г.Эдово',
         seller: 'Анна Морозова',
         agent: '@ann_moroz',
         contacts: '+7 999 333-44-55, @anna_home',
-        status: 'sold'
+        status: 'sale'
     },
     {
         id: 4,
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop',
         price: '22 000 000',
-        location: 'Озёрный бульвар, 21',
+        location: 'г.Эдово',
         seller: 'Мария Коваль',
         agent: '@maria_agency',
         contacts: '+7 999 555-66-77, @maria_estate',
@@ -54,10 +54,10 @@ const housesData = [
         id: 5,
         image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
         price: '7 800 000',
-        location: 'Тихий переулок, 3',
+        location: 'г.Эдово',
         seller: 'Алексей Иванов',
         agent: '@alex_house',
-        contacts: '+7 999 777-88-99, @alex_realtor',
+        contacts: '@alex_realtor',
         status: 'sale'
     }
 ];
