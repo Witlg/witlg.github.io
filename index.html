@@ -1,951 +1,200 @@
-/* ========================================
-   ROOT VARIABLES
-   ======================================== */
-:root {
-    --bg-primary: #f5efe6; /* Теплый кремовый фон */
-    --bg-secondary: #e8dfd1;
-    --text-primary: #2c2420; /* Темно-коричневый/серый */
-    --text-secondary: #4d3e36;
-    --text-muted: #7a6a5e;
-    --text-dim: #9a8a7e;
-    --accent-gold: #b8860b; /* Золотой акцент */
-    --accent-dark: #3a2c24;
-    --accent-gradient: linear-gradient(145deg, #b8860b, #8b6508);
-    --card-bg: rgba(255, 248, 240, 0.85);
-    --border-color: rgba(180, 140, 120, 0.25);
-    --border-white: rgba(255, 255, 255, 0.6);
-    --shadow-glow: 0 10px 30px rgba(60, 40, 30, 0.15);
-    --radius-lg: 16px;
-    --radius-md: 12px;
-    --radius-sm: 8px;
-    --transition: 0.25s ease-in-out;
-}
-
-/* ========================================
-   RESET & BASE
-   ======================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    min-height: 100vh;
-    overflow-x: hidden;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9b8a8' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-/* ========================================
-   FONTS
-   ======================================== */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* ========================================
-   BACKGROUND
-   ======================================== */
-.bg-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(145deg, #f5efe6 0%, #e8dfd1 100%);
-    overflow: hidden;
-}
-
-.bg-wrapper::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
-        radial-gradient(ellipse at 20% 50%, rgba(184, 134, 11, 0.03) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 50%, rgba(60, 40, 30, 0.04) 0%, transparent 50%);
-    animation: bgPulse 20s ease-in-out infinite alternate;
-}
-
-@keyframes bgPulse {
-    0% { transform: scale(1) rotate(0deg); }
-    100% { transform: scale(1.05) rotate(2deg); }
-}
-
-.bg-blur {
-    position: absolute;
-    top: -100px;
-    left: -100px;
-    right: -100px;
-    bottom: -100px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(245, 239, 230, 0.2);
-    pointer-events: none;
-}
-
-/* ========================================
-   CONTAINER
-   ======================================== */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 1;
-}
-
-/* ========================================
-   HEADER
-   ======================================== */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 25px 0;
-    border-bottom: 2px solid var(--border-color);
-    margin-bottom: 40px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-    color: var(--text-primary);
-    font-size: 28px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    cursor: pointer;
-    transition: var(--transition);
-    letter-spacing: -0.5px;
-}
-
-.logo:hover {
-    transform: scale(1.02);
-    color: var(--accent-dark);
-}
-
-.logo-icon {
-    background: var(--accent-gradient);
-    color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    box-shadow: var(--shadow-glow);
-    transition: var(--transition);
-}
-
-.logo:hover .logo-icon {
-    box-shadow: 0 5px 25px rgba(184, 134, 11, 0.4);
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    transition: var(--transition);
-    padding: 8px 0;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--text-primary);
-    border-bottom-color: var(--accent-gold);
-}
-
-.nav-links a i {
-    margin-right: 8px;
-    color: var(--accent-gold);
-}
-
-/* ========================================
-   PAGES
-   ======================================== */
-.page-section {
-    display: none;
-    animation: fadeIn 0.6s ease;
-}
-
-.page-section.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.page-title {
-    font-size: 36px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 8px;
-    color: var(--text-primary);
-}
-
-.page-subtitle {
-    color: var(--text-dim);
-    font-size: 18px;
-    margin-bottom: 30px;
-    font-family: 'Inter', sans-serif;
-}
-
-/* ========================================
-   HERO
-   ======================================== */
-.hero {
-    text-align: center;
-    padding: 40px 0 50px;
-}
-
-.hero-badge {
-    display: inline-block;
-    background: rgba(184, 134, 11, 0.15);
-    border: 1px solid rgba(184, 134, 11, 0.2);
-    padding: 8px 28px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent-dark);
-    margin-bottom: 24px;
-    letter-spacing: 1px;
-    font-family: 'Inter', sans-serif;
-    text-transform: uppercase;
-}
-
-.hero h1 {
-    font-size: 54px;
-    font-weight: 800;
-    font-family: 'Playfair Display', serif;
-    line-height: 1.1;
-    margin-bottom: 16px;
-    color: var(--text-primary);
-}
-
-.hero h1 span {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero p {
-    font-size: 20px;
-    color: var(--text-secondary);
-    max-width: 700px;
-    margin: 0 auto 30px;
-    line-height: 1.8;
-    font-family: 'Inter', sans-serif;
-}
-
-.hero-btn {
-    display: inline-block;
-    background: var(--accent-gradient);
-    color: #fff;
-    padding: 16px 44px;
-    border-radius: 40px;
-    font-weight: 600;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow-glow);
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 0.5px;
-}
-
-.hero-btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 15px 40px rgba(184, 134, 11, 0.3);
-}
-
-.hero-btn i {
-    margin-right: 10px;
-}
-
-/* ========================================
-   3D TRIANGLES — заменены на минималистичные линии
-   ======================================== */
-.triangles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.triangle-3d {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    opacity: 0.06;
-    transition: transform 0.3s ease;
-    pointer-events: auto;
-    cursor: default;
-    border: 1px solid var(--accent-gold);
-    border-radius: 2px;
-    animation: floatSlow 12s ease-in-out infinite alternate;
-}
-
-@keyframes floatSlow {
-    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-    100% { transform: translate(30px, -20px) rotate(10deg) scale(1.1); }
-}
-
-.triangle-3d:hover {
-    opacity: 0.2 !important;
-    transform: scale(1.5) rotate(15deg) !important;
-}
-
-/* ========================================
-   TASKS
-   ======================================== */
-.section-title {
-    font-size: 36px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-    margin: 50px 0 16px;
-    color: var(--text-primary);
-}
-
-.section-subtitle {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 18px;
-    margin-bottom: 40px;
-    font-family: 'Inter', sans-serif;
-}
-
-.tasks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 30px;
-    margin: 30px 0 50px;
-}
-
-.task-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 30px 24px;
-    text-align: center;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-    cursor: default;
-    box-shadow: 0 4px 12px rgba(60, 40, 30, 0.05);
-}
-
-.task-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(145deg, rgba(184, 134, 11, 0.05), rgba(60, 40, 30, 0.02));
-    opacity: 0;
-    transition: var(--transition);
-    border-radius: var(--radius-lg);
-}
-
-.task-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent-gold);
-    box-shadow: 0 15px 40px rgba(60, 40, 30, 0.1);
-}
-
-.task-card:hover::before { opacity: 1; }
-
-.task-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(145deg, rgba(184, 134, 11, 0.1), rgba(60, 40, 30, 0.05));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 28px;
-    color: var(--accent-gold);
-    transition: var(--transition);
-    position: relative;
-    z-index: 1;
-}
-
-.task-card:hover .task-icon {
-    transform: scale(1.1) rotate(-5deg);
-    background: var(--accent-gradient);
-    color: #fff;
-}
-
-.task-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 10px;
-    color: var(--text-primary);
-    position: relative;
-    z-index: 1;
-}
-
-.task-card p {
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 1.7;
-    font-family: 'Inter', sans-serif;
-    position: relative;
-    z-index: 1;
-}
-
-/* ========================================
-   FILTERS
-   ======================================== */
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px 30px;
-    background: var(--card-bg);
-    backdrop-filter: blur(5px);
-    padding: 18px 24px;
-    border-radius: 20px;
-    margin-bottom: 35px;
-    align-items: center;
-    border: 1px solid var(--border-color);
-}
-
-.filter-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.filter-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.3px;
-    font-family: 'Inter', sans-serif;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    padding: 6px 20px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    font-family: 'Inter', sans-serif;
-}
-
-.filter-btn:hover {
-    border-color: var(--accent-gold);
-    color: var(--text-primary);
-    transform: translateY(-2px);
-}
-
-.filter-btn.active {
-    background: var(--accent-gradient);
-    border-color: transparent;
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
-}
-
-.filter-btn i { margin-right: 6px; }
-
-/* ========================================
-   CARDS GRID
-   ======================================== */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 10px;
-}
-
-.results-info {
-    margin: 10px 0 10px 4px;
-    font-size: 15px;
-    color: var(--text-dim);
-    font-family: 'Inter', sans-serif;
-}
-
-.results-info span {
-    color: var(--text-secondary);
-    font-weight: 600;
-}
-
-/* ========================================
-   HOUSE / GARAGE CARDS
-   ======================================== */
-.house-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(5px);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    animation: cardAppear 0.6s ease forwards;
-    box-shadow: 0 4px 12px rgba(60, 40, 30, 0.05);
-}
-
-.house-card:nth-child(1) { animation-delay: 0.05s; }
-.house-card:nth-child(2) { animation-delay: 0.1s; }
-.house-card:nth-child(3) { animation-delay: 0.15s; }
-.house-card:nth-child(4) { animation-delay: 0.2s; }
-.house-card:nth-child(5) { animation-delay: 0.25s; }
-.house-card:nth-child(6) { animation-delay: 0.3s; }
-
-@keyframes cardAppear {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.house-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent-gold);
-    box-shadow: 0 20px 50px rgba(60, 40, 30, 0.1);
-}
-
-.house-image {
-    width: 100%;
-    height: 210px;
-    background: var(--bg-secondary);
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    transition: 0.4s;
-    overflow: hidden;
-}
-
-.house-card:hover .house-image { transform: scale(1.03); }
-
-.house-image::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(180deg, transparent 60%, rgba(245, 239, 230, 0.6));
-    z-index: 1;
-}
-
-.house-status {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    padding: 4px 18px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    z-index: 2;
-    transition: var(--transition);
-    font-family: 'Inter', sans-serif;
-}
-
-.house-status.sale {
-    background: linear-gradient(145deg, #2d7d46, #1a5c33);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(45, 125, 70, 0.2);
-}
-
-.house-status.sold {
-    background: linear-gradient(145deg, #7a3a2a, #5a2a1a);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(122, 58, 42, 0.2);
-}
-
-.house-card:hover .house-status { transform: scale(1.05); }
-
-.house-info {
-    padding: 20px 22px 22px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 1;
-}
-
-.house-price {
-    font-size: 24px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    color: var(--text-primary);
-    margin-bottom: 2px;
-    transition: var(--transition);
-}
-
-.house-card:hover .house-price {
-    color: var(--accent-dark);
-}
-
-.house-price small {
-    font-weight: 400;
-    font-size: 16px;
-    color: var(--text-dim);
-    margin-left: 6px;
-    font-family: 'Inter', sans-serif;
-}
-
-.house-location {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Inter', sans-serif;
-}
-
-.house-location i { color: var(--accent-gold); width: 18px; }
-
-.seller-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--border-color);
-    padding-top: 16px;
-    margin-top: auto;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.seller-name {
-    font-weight: 600;
-    color: var(--text-secondary);
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-}
-
-.seller-name i {
-    color: var(--accent-gold);
-    margin-right: 6px;
-}
-
-.agent-nick {
-    background: rgba(184, 134, 11, 0.1);
-    padding: 4px 14px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent-dark);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border: 1px solid rgba(184, 134, 11, 0.15);
-    transition: var(--transition);
-    font-family: 'Inter', sans-serif;
-}
-
-.house-card:hover .agent-nick {
-    background: rgba(184, 134, 11, 0.15);
-    border-color: var(--accent-gold);
-}
-
-.agent-nick i { color: var(--accent-gold); font-size: 12px; }
-
-.contacts {
-    margin-top: 12px;
-    background: rgba(255, 248, 240, 0.5);
-    padding: 10px 14px;
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-    font-family: 'Inter', sans-serif;
-}
-
-.house-card:hover .contacts {
-    border-color: var(--accent-gold);
-    background: rgba(255, 248, 240, 0.8);
-}
-
-.contacts i { color: var(--accent-gold); width: 20px; text-align: center; }
-
-.contacts .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(184, 134, 11, 0.05);
-    padding: 2px 12px 2px 8px;
-    border-radius: 30px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    transition: var(--transition);
-}
-
-.contacts .contact-item:hover {
-    background: rgba(184, 134, 11, 0.1);
-    transform: translateX(4px);
-}
-
-.contacts .contact-item i {
-    color: var(--accent-gold);
-    font-size: 6px;
-    width: auto;
-}
-
-/* ========================================
-   TRANSPORT
-   ======================================== */
-.transport-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    margin: 30px 0;
-}
-
-.transport-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 30px 24px;
-    text-align: center;
-    transition: var(--transition);
-    opacity: 0;
-    animation: cardAppear 0.6s ease forwards;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(60, 40, 30, 0.05);
-}
-
-.transport-card:nth-child(1) { animation-delay: 0.05s; }
-.transport-card:nth-child(2) { animation-delay: 0.1s; }
-.transport-card:nth-child(3) { animation-delay: 0.15s; }
-.transport-card:nth-child(4) { animation-delay: 0.2s; }
-
-.transport-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(145deg, rgba(184, 134, 11, 0.05), rgba(60, 40, 30, 0.02));
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.transport-card:hover::before { opacity: 1; }
-
-.transport-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent-gold);
-    box-shadow: 0 15px 40px rgba(60, 40, 30, 0.1);
-}
-
-.transport-card:active { transform: scale(0.95); }
-
-.transport-icon {
-    font-size: 48px;
-    color: var(--accent-gold);
-    margin-bottom: 12px;
-    transition: var(--transition);
-    position: relative;
-    z-index: 1;
-}
-
-.transport-card:hover .transport-icon {
-    transform: scale(1.1) rotate(-5deg);
-    color: var(--accent-dark);
-}
-
-.transport-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-    position: relative;
-    z-index: 1;
-}
-
-.transport-card p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.7;
-    font-family: 'Inter', sans-serif;
-    position: relative;
-    z-index: 1;
-}
-
-/* ========================================
-   SUB CATALOG
-   ======================================== */
-.sub-catalog {
-    display: none;
-    margin-top: 30px;
-}
-
-.sub-catalog.active {
-    display: block;
-    animation: fadeIn 0.4s ease;
-}
-
-.sub-catalog .back-btn {
-    background: rgba(184, 134, 11, 0.1);
-    border: 1px solid rgba(184, 134, 11, 0.2);
-    color: var(--accent-dark);
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: var(--transition);
-    margin-bottom: 20px;
-    font-family: 'Inter', sans-serif;
-}
-
-.sub-catalog .back-btn:hover {
-    background: rgba(184, 134, 11, 0.2);
-    transform: translateX(-5px);
-}
-
-.sub-catalog .back-btn i { margin-right: 8px; }
-
-/* ========================================
-   CONTACTS
-   ======================================== */
-.contacts-page {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-.contact-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 30px;
-    margin-bottom: 20px;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    box-shadow: 0 4px 12px rgba(60, 40, 30, 0.05);
-}
-
-.contact-card:hover {
-    transform: translateX(8px);
-    border-color: var(--accent-gold);
-    box-shadow: 0 10px 30px rgba(60, 40, 30, 0.08);
-}
-
-.contact-card .icon {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(145deg, rgba(184, 134, 11, 0.1), rgba(60, 40, 30, 0.05));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: var(--accent-gold);
-    flex-shrink: 0;
-}
-
-.contact-card .info h3 {
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    color: var(--text-primary);
-}
-
-.contact-card .info p {
-    color: var(--text-muted);
-    font-size: 15px;
-    font-family: 'Inter', sans-serif;
-}
-
-.contact-card .info a {
-    color: var(--accent-gold);
-    text-decoration: none;
-    transition: var(--transition);
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-}
-
-.contact-card .info a:hover {
-    color: var(--accent-dark);
-    text-decoration: underline;
-}
-
-/* ========================================
-   FOOTER
-   ======================================== */
-.footer {
-    border-top: 1px solid var(--border-color);
-    padding: 30px 0;
-    margin-top: 60px;
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-}
-
-.footer i { color: var(--accent-gold); margin: 0 4px; }
-
-/* ========================================
-   RESPONSIVE
-   ======================================== */
-@media (max-width: 700px) {
-    .header {
-        flex-direction: column;
-        gap: 16px;
-    }
-    .nav-links {
-        justify-content: center;
-        gap: 12px;
-    }
-    .nav-links a {
-        font-size: 14px;
-        padding: 6px 0;
-    }
-    .hero h1 { font-size: 32px; }
-    .hero p { font-size: 17px; }
-    .filters {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-    .filter-group { justify-content: center; }
-    .contacts { flex-direction: column; align-items: flex-start; }
-    .contact-card { flex-direction: column; text-align: center; }
-    .triangles-container { display: none; }
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitsune Estate — недвижимость и транспорт</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== ФОН ===== -->
+<div class="bg-wrapper">
+    <div class="bg-blur"></div>
+</div>
+
+<!-- ===== 3D ЭЛЕМЕНТЫ ===== -->
+<div class="triangles-container" id="trianglesContainer"></div>
+
+<div class="container">
+
+    <!-- ===== ШАПКА ===== -->
+    <header class="header">
+        <div class="logo" onclick="showPage('home')">
+            <span class="logo-icon"><i class="fas fa-fox"></i></span>
+            Kitsune Estate
+        </div>
+        <div class="nav-links">
+            <a class="active" onclick="showPage('home')"><i class="fas fa-home"></i> Главная</a>
+            <a onclick="showPage('catalog')"><i class="fas fa-building"></i> Дома</a>
+            <a onclick="showPage('garages')"><i class="fas fa-warehouse"></i> Гаражи</a>
+            <a onclick="showPage('transport')"><i class="fas fa-car"></i> Транспорт</a>
+            <a onclick="showPage('contacts')"><i class="fas fa-phone"></i> Контакты</a>
+        </div>
+    </header>
+
+    <!-- ===== ГЛАВНАЯ ===== -->
+    <div class="page-section active" id="page-home">
+        <div class="hero">
+            <div class="hero-badge">
+                <i class="fas fa-star" style="margin-right: 6px;"></i> Добро пожаловать
+            </div>
+            <h1>Ваш гид по <span>недвижимости</span><br>и транспорту в Rodina RP</h1>
+            <p>
+                Мы помогаем находить идеальные дома, гаражи и автомобили. 
+                Все предложения — только от проверенных агентов.
+            </p>
+            <button class="hero-btn" onclick="showPage('catalog')">
+                <i class="fas fa-search"></i> Смотреть каталог
+            </button>
+        </div>
+
+        <h2 class="section-title">Наши задачи</h2>
+        <p class="section-subtitle">То, ради чего мы создали это агентство</p>
+
+        <div class="tasks-grid">
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-folder-open"></i></div>
+                <h3>Централизованный каталог</h3>
+                <p>Единая база всех объектов недвижимости и транспорта, доступная в любое время.</p>
+            </div>
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-sliders-h"></i></div>
+                <h3>Фильтрация и поиск</h3>
+                <p>Быстрый подбор по типу, статусу и другим параметрам.</p>
+            </div>
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-check-circle"></i></div>
+                <h3>Актуальность</h3>
+                <p>Реальный статус объектов и контакты ответственных агентов.</p>
+            </div>
+            <div class="task-card">
+                <div class="task-icon"><i class="fas fa-users-cog"></i></div>
+                <h3>Командная работа</h3>
+                <p>Общая база для сотрудников, упрощение учёта и публикации.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ДОМА ===== -->
+    <div class="page-section" id="page-catalog">
+        <h2 class="page-title">
+            <i class="fas fa-building" style="color: var(--accent-gold);"></i> Дома
+        </h2>
+        <p class="page-subtitle">Выберите свой идеальный дом</p>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label><i class="fas fa-sliders-h"></i> Статус:</label>
+                <button class="filter-btn active" data-status="all" data-target="houses">Все</button>
+                <button class="filter-btn" data-status="sale" data-target="houses"><i class="fas fa-check-circle" style="color: #2d7d46;"></i> В продаже</button>
+                <button class="filter-btn" data-status="sold" data-target="houses"><i class="fas fa-times-circle" style="color: #7a3a2a;"></i> Продано</button>
+            </div>
+        </div>
+
+        <div class="results-info">Показано <span id="houseCount">0</span> домов</div>
+        <div class="cards-grid" id="housesGrid"></div>
+    </div>
+
+    <!-- ===== ГАРАЖИ ===== -->
+    <div class="page-section" id="page-garages">
+        <h2 class="page-title">
+            <i class="fas fa-warehouse" style="color: var(--accent-gold);"></i> Гаражи
+        </h2>
+        <p class="page-subtitle">Все гаражи в одном месте</p>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label><i class="fas fa-sliders-h"></i> Статус:</label>
+                <button class="filter-btn active" data-status="all" data-target="garages">Все</button>
+                <button class="filter-btn" data-status="sale" data-target="garages"><i class="fas fa-check-circle" style="color: #2d7d46;"></i> В продаже</button>
+                <button class="filter-btn" data-status="sold" data-target="garages"><i class="fas fa-times-circle" style="color: #7a3a2a;"></i> Продано</button>
+            </div>
+        </div>
+
+        <div class="results-info">Показано <span id="garageCount">0</span> гаражей</div>
+        <div class="cards-grid" id="garagesGrid"></div>
+    </div>
+
+    <!-- ===== ТРАНСПОРТ ===== -->
+    <div class="page-section" id="page-transport">
+        <h2 class="page-title">
+            <i class="fas fa-car" style="color: var(--accent-gold);"></i> Транспорт
+        </h2>
+        <p class="page-subtitle">Выберите категорию</p>
+
+        <div class="transport-grid" id="transportCategories">
+            <div class="transport-card" onclick="showTransportCategory('cars')">
+                <div class="transport-icon"><i class="fas fa-car-side"></i></div>
+                <h3>Легковые авто</h3>
+                <p>Широкий выбор для любых задач</p>
+            </div>
+            <div class="transport-card" onclick="showTransportCategory('trucks')">
+                <div class="transport-icon"><i class="fas fa-truck"></i></div>
+                <h3>Грузовой транспорт</h3>
+                <p>Грузовики, фургоны и спецтехника</p>
+            </div>
+            <div class="transport-card" onclick="showTransportCategory('motorcycles')">
+                <div class="transport-icon"><i class="fas fa-motorcycle"></i></div>
+                <h3>Мотоциклы</h3>
+                <p>Спортивные, круизеры и эндуро</p>
+            </div>
+            <div class="transport-card" onclick="showTransportCategory('water')">
+                <div class="transport-icon"><i class="fas fa-ship"></i></div>
+                <h3>Водный транспорт</h3>
+                <p>Катера, яхты и лодки</p>
+            </div>
+        </div>
+
+        <div class="sub-catalog" id="transportSubCatalog">
+            <button class="back-btn" onclick="hideTransportSubCatalog()"><i class="fas fa-arrow-left"></i> Назад к категориям</button>
+            <div class="cards-grid" id="transportCardsGrid"></div>
+        </div>
+    </div>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <div class="page-section" id="page-contacts">
+        <h2 class="page-title" style="text-align: center;">
+            <i class="fas fa-phone" style="color: var(--accent-gold);"></i> Контакты
+        </h2>
+        <p class="page-subtitle" style="text-align: center;">Свяжитесь с нами удобным способом</p>
+
+        <div class="contacts-page">
+            <div class="contact-card">
+                <div class="icon"><i class="fab fa-discord"></i></div>
+                <div class="info">
+                    <h3>Discord</h3>
+                    <p>Присоединяйтесь к нашему серверу</p>
+                    <a href="#">Пока делаем :)</a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="icon"><i class="fab fa-telegram"></i></div>
+                <div class="info">
+                    <h3>Telegram</h3>
+                    <p>Быстрые консультации</p>
+                    <a href="#">Тоже пока делаем :)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ФУТЕР ===== -->
+    <div class="footer">
+        <i class="fas fa-fox"></i> Kitsune Estate — создано с любовью от Kitsune
+        <br><span style="font-size: 12px; color: var(--text-dim); opacity: 0.6;">© 2026 Все права защищены</span>
+    </div>
+</div>
+
+<!-- ===== Main JavaScript ===== -->
+<script src="js/main.js"></script>
+</body>
+</html>
