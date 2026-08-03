@@ -40,7 +40,7 @@ const transportData = {
     cars: [
         { 
             name: 'Тут могла бы быть ваша машина! Телл 3787', 
-            price: '-', 
+            price: 'Тут могла бы быть ваша машина! Телл 3787', 
             mileage: '-',
             seller: '-',
             agent: '-',
@@ -52,7 +52,7 @@ const transportData = {
     trucks: [
         { 
             name: 'Тут могла бы быть ваша фура! Телл 3787', 
-            price: '-', 
+            price: 'Тут могла бы быть ваша фура! Телл 3787', 
             capacity: '-', 
             mileage: '-',
             seller: '-',
@@ -65,7 +65,7 @@ const transportData = {
     motorcycles: [
         { 
             name: 'Тут мог бы быть ваш мотоцикл! Телл 3787', 
-            price: '-',
+            price: 'Тут мог бы быть ваш мотоцикл! Телл 3787',
             mileage: '-',
             seller: '-',
             agent: '-',
@@ -77,7 +77,7 @@ const transportData = {
     water: [
         { 
             name: 'Тут могла бы быть ваша лодка! Телл 3787', 
-            price: '-',  
+            price: 'Тут могла бы быть ваша лодка! Телл 3787',  
             seller: '-',
             agent: '-',
             contacts: '-',
