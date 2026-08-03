@@ -1,7 +1,7 @@
 /**
  * Kitsune Estate — Main JavaScript
  * Автор: Kitsune Estate Team
- * Версия: 1.1
+ * Версия: 1.2
  */
 
 // ========================================
@@ -14,27 +14,27 @@ const housesData = [
         id: 1,
         image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop',
         price: '12 500 000',
-        location: 'г.Эдово',
-        seller: 'Продевец: Екатерина Волкова',
-        agent: 'Агент: @kate_estate',
-        contacts: 'Discord: @kate_house',
+        location: 'г. Эдово, ул. Центральная, 15',
+        seller: 'Екатерина Волкова',
+        agent: '@kate_estate',
+        contacts: 'Discord: @kate_house, +7 999 111-22-33',
         status: 'sale'
     },
     {
         id: 2,
         image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=400&fit=crop',
         price: '9 200 000',
-        location: 'г.Эдово',
-        seller: 'Продевец: Дмитрий Петров',
-        agent: 'Агент: @dima_pro',
-        contacts: 'Discord: @dima_realtor',
+        location: 'г. Эдово, ул. Садовая, 7',
+        seller: 'Дмитрий Петров',
+        agent: '@dima_pro',
+        contacts: 'Discord: @dima_realtor, +7 999 222-33-44',
         status: 'sale'
     },
     {
         id: 3,
         image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop',
         price: '18 700 000',
-        location: 'г.Эдово',
+        location: 'г. Эдово, ул. Лесная, 22',
         seller: 'Анна Морозова',
         agent: '@ann_moroz',
         contacts: '+7 999 333-44-55, @anna_home',
@@ -44,7 +44,7 @@ const housesData = [
         id: 4,
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop',
         price: '22 000 000',
-        location: 'г.Эдово',
+        location: 'г. Эдово, ул. Парковая, 5',
         seller: 'Мария Коваль',
         agent: '@maria_agency',
         contacts: '+7 999 555-66-77, @maria_estate',
@@ -54,10 +54,10 @@ const housesData = [
         id: 5,
         image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
         price: '7 800 000',
-        location: 'г.Эдово',
+        location: 'г. Эдово, ул. Речная, 3',
         seller: 'Алексей Иванов',
         agent: '@alex_house',
-        contacts: '@alex_realtor',
+        contacts: '@alex_realtor, +7 999 666-77-88',
         status: 'sale'
     }
 ];
@@ -121,7 +121,7 @@ const garagesData = [
     }
 ];
 
-/** Данные транспорта (обновлены с полной информацией) */
+/** Данные транспорта */
 const transportData = {
     cars: [
         { 
@@ -305,7 +305,6 @@ const transportData = {
 // STATE
 // ========================================
 
-/** Текущие фильтры */
 const filters = {
     houses: 'all',
     garages: 'all'
@@ -324,9 +323,6 @@ const garageCount = document.getElementById('garageCount');
 // RENDER FUNCTIONS
 // ========================================
 
-/**
- * Создаёт HTML для статус-тега
- */
 function createStatusTag(status) {
     const statusMap = {
         'sale': { class: 'sale', text: 'В продаже' },
@@ -336,18 +332,15 @@ function createStatusTag(status) {
     return `<span class="house-status ${s.class}">${s.text}</span>`;
 }
 
-/**
- * Рендерит карточки домов
- */
 function renderHouses() {
     const filtered = housesData.filter(h => filters.houses === 'all' || h.status === filters.houses);
     houseCount.textContent = filtered.length;
 
     if (filtered.length === 0) {
         housesGrid.innerHTML = `
-            <div style="grid-column:1/-1; text-align:center; padding:60px 20px; background:rgba(26,15,46,0.6); border-radius:24px; border:1px solid rgba(180,80,200,0.15);">
-                <i class="fas fa-search" style="font-size:48px; color:#4a3a5a;"></i>
-                <p style="margin-top:16px; font-size:18px; color:#8a7a9a;">Нет домов с таким статусом</p>
+            <div style="grid-column:1/-1; text-align:center; padding:60px 20px; background:var(--card-bg); border-radius:16px; border:1px solid var(--border-color);">
+                <i class="fas fa-search" style="font-size:48px; color:var(--text-dim);"></i>
+                <p style="margin-top:16px; font-size:18px; color:var(--text-dim);">Нет домов с таким статусом</p>
             </div>
         `;
         return;
@@ -380,18 +373,15 @@ function renderHouses() {
     housesGrid.innerHTML = html;
 }
 
-/**
- * Рендерит карточки гаражей
- */
 function renderGarages() {
     const filtered = garagesData.filter(g => filters.garages === 'all' || g.status === filters.garages);
     garageCount.textContent = filtered.length;
 
     if (filtered.length === 0) {
         garagesGrid.innerHTML = `
-            <div style="grid-column:1/-1; text-align:center; padding:60px 20px; background:rgba(26,15,46,0.6); border-radius:24px; border:1px solid rgba(180,80,200,0.15);">
-                <i class="fas fa-search" style="font-size:48px; color:#4a3a5a;"></i>
-                <p style="margin-top:16px; font-size:18px; color:#8a7a9a;">Нет гаражей с таким статусом</p>
+            <div style="grid-column:1/-1; text-align:center; padding:60px 20px; background:var(--card-bg); border-radius:16px; border:1px solid var(--border-color);">
+                <i class="fas fa-search" style="font-size:48px; color:var(--text-dim);"></i>
+                <p style="margin-top:16px; font-size:18px; color:var(--text-dim);">Нет гаражей с таким статусом</p>
             </div>
         `;
         return;
@@ -427,9 +417,6 @@ function renderGarages() {
 // TRANSPORT FUNCTIONS
 // ========================================
 
-/**
- * Показывает подкаталог с выбранной категорией транспорта
- */
 window.showTransportCategory = function(category) {
     const categories = document.getElementById('transportCategories');
     const subCatalog = document.getElementById('transportSubCatalog');
@@ -441,7 +428,6 @@ window.showTransportCategory = function(category) {
     const items = transportData[category] || [];
     let html = '';
     items.forEach((item, index) => {
-        // Собираем характеристики
         let specs = [];
         if (item.year) specs.push(item.year);
         if (item.engine) specs.push(item.engine);
@@ -476,12 +462,9 @@ window.showTransportCategory = function(category) {
         `;
     });
 
-    grid.innerHTML = html || '<p style="color:#8a7a9a; text-align:center; padding:40px;">В этой категории пока нет предложений</p>';
+    grid.innerHTML = html || '<p style="color:var(--text-dim); text-align:center; padding:40px;">В этой категории пока нет предложений</p>';
 };
 
-/**
- * Скрывает подкаталог транспорта и показывает категории
- */
 window.hideTransportSubCatalog = function() {
     document.getElementById('transportCategories').style.display = 'grid';
     document.getElementById('transportSubCatalog').classList.remove('active');
@@ -491,23 +474,16 @@ window.hideTransportSubCatalog = function() {
 // PAGE NAVIGATION
 // ========================================
 
-/**
- * Переключает страницы
- */
 window.showPage = function(page) {
-    // Скрываем все страницы
     document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
 
-    // Показываем нужную
     const target = document.getElementById('page-' + page);
     if (target) {
         target.classList.add('active');
-        // Перезапускаем анимацию
         target.style.animation = 'none';
-        requestAnimationFrame(() => target.style.animation = 'fadeIn 0.5s ease');
+        requestAnimationFrame(() => target.style.animation = 'fadeIn 0.6s ease');
     }
 
-    // Обновляем активную ссылку в навигации
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.classList.remove('active');
         const text = link.textContent.trim().toLowerCase();
@@ -523,7 +499,6 @@ window.showPage = function(page) {
         }
     });
 
-    // Перерисовываем контент при необходимости
     if (page === 'catalog') renderHouses();
     if (page === 'garages') renderGarages();
 };
@@ -532,24 +507,18 @@ window.showPage = function(page) {
 // FILTER SETUP
 // ========================================
 
-/**
- * Настраивает фильтры для домов и гаражей
- */
 function setupFilters() {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const target = this.dataset.target; // 'houses' или 'garages'
+            const target = this.dataset.target;
             const status = this.dataset.status;
 
-            // Обновляем активный класс в группе
             const parent = this.closest('.filter-group');
             parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
 
-            // Обновляем состояние фильтра
             filters[target] = status;
 
-            // Перерисовываем соответствующую сетку
             if (target === 'houses') renderHouses();
             if (target === 'garages') renderGarages();
         });
@@ -557,83 +526,23 @@ function setupFilters() {
 }
 
 // ========================================
-// 3D TRIANGLES
+// 3D ELEMENTS (Minimalist)
 // ========================================
 
-/**
- * Создаёт 3D-треугольники на фоне
- */
 function createTriangles() {
     const container = document.getElementById('trianglesContainer');
-    const count = 25;
+    const count = 15;
 
     for (let i = 0; i < count; i++) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'triangle-3d';
-
-        const size = 40 + Math.random() * 50;
-        const xOffsets = Array.from({ length: 4 }, () => (Math.random() - 0.5) * 150);
-        const yOffsets = Array.from({ length: 4 }, () => (Math.random() - 0.5) * 150);
-
-        wrapper.style.width = size + 'px';
-        wrapper.style.height = (size * 0.86) + 'px';
-        wrapper.style.left = Math.random() * 100 + '%';
-        wrapper.style.top = Math.random() * 100 + '%';
-        
-        // CSS-переменные для анимации
-        xOffsets.forEach((x, idx) => wrapper.style.setProperty(`--x${idx + 1}`, x + 'px'));
-        yOffsets.forEach((y, idx) => wrapper.style.setProperty(`--y${idx + 1}`, y + 'px'));
-
-        // 3D грани
-        wrapper.innerHTML = `
-            <div class="face face-front"></div>
-            <div class="face face-back"></div>
-            <div class="face face-left"></div>
-            <div class="face face-right"></div>
-            <div class="vertex vertex-top"></div>
-            <div class="vertex vertex-bottom-left"></div>
-            <div class="vertex vertex-bottom-right"></div>
-            <div class="edge edge-top-left"></div>
-            <div class="edge edge-top-right"></div>
-            <div class="edge edge-bottom"></div>
-        `;
-
-        // Случайный начальный поворот
-        const rotX = (Math.random() - 0.5) * 30;
-        const rotY = (Math.random() - 0.5) * 30;
-        wrapper.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${Math.random() * 360}deg)`;
-        wrapper.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-        // Обработка наведения мыши
-        wrapper.addEventListener('mouseenter', function(e) {
-            const rect = this.getBoundingClientRect();
-            const cx = rect.left + rect.width / 2;
-            const cy = rect.top + rect.height / 2;
-            const dx = e.clientX - cx;
-            const dy = e.clientY - cy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < 300) {
-                const angle = Math.atan2(dy, dx);
-                const force = Math.min(300 / (dist + 10), 4);
-                const moveX = -Math.cos(angle) * force * 120;
-                const moveY = -Math.sin(angle) * force * 120;
-
-                this.style.transition = 'transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s';
-                this.style.transform = `translate(${moveX}px, ${moveY}px) rotateX(${30 + Math.random() * 30}deg) rotateY(${40 + Math.random() * 40}deg) rotateZ(${Math.random() * 60 - 30}deg) scale(2)`;
-                this.style.opacity = '0.5';
-                this.style.zIndex = '10';
-            }
-        });
-
-        wrapper.addEventListener('mouseleave', function() {
-            this.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s';
-            this.style.transform = '';
-            this.style.opacity = '';
-            this.style.zIndex = '';
-        });
-
-        container.appendChild(wrapper);
+        const el = document.createElement('div');
+        el.className = 'triangle-3d';
+        el.style.left = Math.random() * 100 + '%';
+        el.style.top = Math.random() * 100 + '%';
+        el.style.width = (40 + Math.random() * 60) + 'px';
+        el.style.height = (40 + Math.random() * 60) + 'px';
+        el.style.animationDuration = (8 + Math.random() * 8) + 's';
+        el.style.animationDelay = (Math.random() * 4) + 's';
+        container.appendChild(el);
     }
 }
 
@@ -641,9 +550,6 @@ function createTriangles() {
 // INITIALIZATION
 // ========================================
 
-/**
- * Главная функция инициализации
- */
 function init() {
     createTriangles();
     setupFilters();
@@ -652,7 +558,6 @@ function init() {
     renderGarages();
 }
 
-// Запускаем после загрузки DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
